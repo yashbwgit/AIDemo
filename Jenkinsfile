@@ -24,7 +24,7 @@ pipeline {
 
         stage('Run Dashboard') {
             steps {
-                bat "${env.py} -m streamlit run Vertexone/Dashboard/dashboard.py --server.headless true --server.fileWatcherType none &"
+                bat "${env.py} -m streamlit run Dashboard/dashboard.py --server.headless true --server.fileWatcherType none &"
                 bat "timeout /T 10"
             }
             post {
