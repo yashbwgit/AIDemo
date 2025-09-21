@@ -41,7 +41,7 @@ pipeline {
                         sh 'streamlit run Vertexone/Dashboard/dashboard.py --server.headless true &'
                         sh 'sleep 10'
                     } else {
-                        bat 'start /B streamlit run Vertexone\Dashboard\dashboard.py --server.headless true'
+                        bat 'start /B streamlit run Vertexone/Dashboard/dashboard.py --server.headless true'
                         bat 'timeout /T 10'
                     }
                 }
