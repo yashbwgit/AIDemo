@@ -1,56 +1,37 @@
 pipeline {
     agent any
     environment {
-        PYTHONUNBUFFERED = 1
+        py = "py"
     }
     stages {
         stage('Checkout') {
-            steps {
-                checkout scm
-            }
+            steps { checkout scm }
         }
-        stage('Set up Python') {
-            steps {
-                script {
-                    if (isUnix()) {
-                        sh 'which python3 || sudo apt-get update && sudo apt-get install -y python3 python3-pip'
-                        sh 'python3 --version'
-                    } else {
-                        bat 'py --version'
-                    }
-                }
-            }
-        }
+
         stage('Install dependencies') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'python3 -m pip install --upgrade pip'
-                        sh 'python3 -m pip install streamlit pandas'
-                    } else {
-                        bat 'py -m pip install --upgrade pip'
-                        bat 'py -m pip install streamlit pandas'
-                    }
-                }
+                bat "${env.py} -m pip install --upgrade pip"
+                bat "${env.py} -m pip install streamlit pandas"
             }
         }
+
+        stage('Prepare Results Folder') {
+            steps {
+                bat "if exist Results rd /s /q Results"
+                bat "mkdir Results"
+            }
+        }
+
         stage('Run Dashboard') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'streamlit run Vertexone/Dashboard/dashboard.py --server.headless true &'
-                        sh 'sleep 10'
-                    } else {
-                        bat 'start /B streamlit run Vertexone/Dashboard/dashboard.py --server.headless true'
-                        bat 'timeout /T 10'
-                    }
+                bat "${env.py} -m streamlit run Vertexone/Dashboard/dashboard.py --server.headless true --server.fileWatcherType none &"
+                bat "timeout /T 10"
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'Results/**', fingerprint: true
                 }
             }
-        }
-    }
-    post {
-        always {
-            echo 'Pipeline completed.'
         }
     }
 }
