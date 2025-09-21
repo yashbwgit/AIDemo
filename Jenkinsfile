@@ -16,7 +16,7 @@ pipeline {
                         sh 'which python3 || sudo apt-get update && sudo apt-get install -y python3 python3-pip'
                         sh 'python3 --version'
                     } else {
-                        bat 'python --version'
+                        bat 'py --version'
                     }
                 }
             }
@@ -28,8 +28,8 @@ pipeline {
                         sh 'python3 -m pip install --upgrade pip'
                         sh 'python3 -m pip install streamlit pandas'
                     } else {
-                        bat 'python -m pip install --upgrade pip'
-                        bat 'python -m pip install streamlit pandas'
+                        bat 'py -m pip install --upgrade pip'
+                        bat 'py -m pip install streamlit pandas'
                     }
                 }
             }
