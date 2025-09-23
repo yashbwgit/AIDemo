@@ -26,14 +26,14 @@ User should be navigated to the dashboard page",FAILED,21084.3942,"java.lang.Ass
 	at stepdefinitions.LoginStepDefinitions.user_should_be_navigated_to_the_dashboard_page(LoginStepDefinitions.java:91)
 	at ✽.User should be navigated to the dashboard page(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:33)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The application may not support special characters in credentials, causing login to fail.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Confirm requirements for allowed characters.
+  2. Update backend validation and test data.
+  3. Add user feedback for unsupported characters.
+Benefits:
+  - Ensures login works for all valid credential types.
+  - Improves user experience and reduces login issues."
 OrangeHRM Login Page,Login with valid long username and password,dae7732b-80b2-43c9-a027-9c153dd6e2fb,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""AdminAdminAdmin""
 User enters password ""admin123456789""
@@ -45,14 +45,14 @@ User should be navigated to the dashboard page",FAILED,18358.0553,"java.lang.Ass
 	at stepdefinitions.LoginStepDefinitions.user_should_be_navigated_to_the_dashboard_page(LoginStepDefinitions.java:91)
 	at ✽.User should be navigated to the dashboard page(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:39)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The application may have length restrictions on username or password fields.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Check application and database field length limits.
+  2. Update test data to match allowed lengths.
+  3. Add validation and user feedback for excessive input.
+Benefits:
+  - Prevents user confusion and ensures only valid data is submitted.
+  - Reduces login failures due to input length."
 OrangeHRM Login Page,Login with invalid username and valid password,c1698ce7-8dcd-4367-b221-c765ca28dd16,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""WrongUser""
 User enters password ""admin123""
@@ -81,14 +81,14 @@ User should see error message ""Required""",FAILED,17410.188599999998,"java.lang
 	at stepdefinitions.LoginStepDefinitions.user_should_see_error_message(LoginStepDefinitions.java:97)
 	at ✽.User should see error message ""Required""(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:64)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The application did not display the required error message for a missing username.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Ensure frontend validation is implemented for empty username fields.
+  2. Add backend validation as a fallback.
+  3. Update test to check for correct error message.
+Benefits:
+  - Improves user guidance and reduces login errors.
+  - Ensures compliance with UX standards."
 OrangeHRM Login Page,Login with valid username and empty password,d198f7bb-a200-4b13-8170-ce376cb9498b,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""Admin""
 User leaves password blank
@@ -102,14 +102,14 @@ User should see error message ""Required""",FAILED,18515.1293,"java.lang.Asserti
 	at stepdefinitions.LoginStepDefinitions.user_should_see_error_message(LoginStepDefinitions.java:97)
 	at ✽.User should see error message ""Required""(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:70)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The application did not display the required error message for a missing password.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Ensure frontend validation is implemented for empty password fields.
+  2. Add backend validation as a fallback.
+  3. Update test to check for correct error message.
+Benefits:
+  - Improves user guidance and reduces login errors.
+  - Ensures compliance with UX standards."
 OrangeHRM Login Page,Login with both fields empty,404c6c81-83fe-4e01-8bea-a4f66ab2a1ee,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User leaves username blank
 User leaves password blank
@@ -123,14 +123,14 @@ User should see error message ""Required""",FAILED,18199.311799999996,"java.lang
 	at stepdefinitions.LoginStepDefinitions.user_should_see_error_message(LoginStepDefinitions.java:97)
 	at ✽.User should see error message ""Required""(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:76)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The application did not display the required error message for missing username and password.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Ensure frontend validation is implemented for both fields.
+  2. Add backend validation as a fallback.
+  3. Update test to check for correct error message.
+Benefits:
+  - Improves user guidance and reduces login errors.
+  - Ensures compliance with UX standards."
 OrangeHRM Login Page,Login with spaces before username,a129b6f5-65ed-4c44-a9d6-cdd737fd8371,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""   Admin""
 User enters password ""admin123""
@@ -164,14 +164,14 @@ Password should be visible in plain text",FAILED,7613.496000000001,"java.lang.As
 	at stepdefinitions.LoginStepDefinitions.password_should_be_visible_in_plain_text(LoginStepDefinitions.java:113)
 	at ✽.Password should be visible in plain text(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:110)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The Show Password feature may not be implemented or is malfunctioning.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Verify the Show Password button triggers the correct UI event.
+  2. Check for JavaScript errors or missing event handlers.
+  3. Ensure password field type toggles between 'password' and 'text'.
+Benefits:
+  - Improves usability for users entering complex passwords.
+  - Reduces login errors due to mistyped passwords."
 OrangeHRM Login Page,Verify password min length restriction,60990c34-10f2-43ca-8c0e-b64475a55d2a,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""Admin""
 User enters password ""a""
@@ -192,14 +192,14 @@ Login button should be disabled",FAILED,7240.0157,"java.lang.AssertionError: Log
 	at stepdefinitions.LoginStepDefinitions.login_button_should_be_disabled(LoginStepDefinitions.java:118)
 	at ✽.Login button should be disabled(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:128)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The Login button is not properly disabled when required fields are empty.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Add frontend validation to disable the button when fields are blank.
+  2. Add backend validation to reject empty submissions.
+  3. Update test to verify button state.
+Benefits:
+  - Prevents invalid login attempts.
+  - Improves user experience and reduces server load."
 OrangeHRM Login Page,Verify Username placeholder text,881dbb3b-de15-4c80-995b-b9954eb15e97,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 Username field should display placeholder ""Username""",PASSED,6782.3165,,
 OrangeHRM Login Page,Verify Password placeholder text,cd59a484-1f76-47d0-a927-51e1f21d6649,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
@@ -208,17 +208,7 @@ OrangeHRM Login Page,Verify Forgot Password link is visible,a40530d1-c65f-436b-a
 Forgot your password link should be visible",PENDING,7203.6062999999995,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.forgot_your_password_link_should_be_visible(LoginStepDefinitions.java:182)
 	at ✽.Forgot your password link should be visible(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:137)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.forgot_your_password_lin...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     Forgot your password link should be visible
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify Forgot Password navigation,ae62f69e-bfd4-42f3-a7f4-d36102c97909,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User clicks on Forgot your password link
 User should be navigated to the reset password page",PASSED,8560.6505,,
@@ -234,14 +224,14 @@ Error message should disappear",FAILED,10011.6729,"java.lang.AssertionError: Err
 	at stepdefinitions.LoginStepDefinitions.error_message_should_disappear(LoginStepDefinitions.java:141)
 	at ✽.Error message should disappear(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:148)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The error message is not cleared after correcting credentials.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Ensure error messages are reset on input change or new login attempt.
+  2. Update frontend logic to clear errors on valid input.
+  3. Add test to verify error message disappears.
+Benefits:
+  - Improves user feedback and reduces confusion.
+  - Ensures error states do not persist incorrectly."
 OrangeHRM Login Page,Verify multiple clicks on Login button are not allowed,71d82330-bddb-4dc9-b69b-c17086bee7d8,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""Admin""
 User enters password ""admin123""
@@ -249,20 +239,7 @@ User clicks Login button multiple times quickly
 Only one login attempt should be processed",SKIPPED,9466.9347,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_clicks_login_button_multiple_times_quickly(LoginStepDefinitions.java:187)
 	at ✽.User clicks Login button multiple times quickly(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:153)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_clicks_login_button...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User enters username ""Admin""
-     User enters password ""admin123""
-     User clicks Login button multiple times quickly
-     Only one login attempt should be processed
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify Login page loads within acceptable time,e672c5f3-1770-446d-8372-337f673e06e6,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User opens the login page
 Page should load within 3 seconds",PASSED,7609.1323999999995,,
@@ -272,19 +249,7 @@ Cursor should move to Password field
 Next Tab should move to Login button",SKIPPED,7260.5353000000005,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_presses_tab_key_on_username_field(LoginStepDefinitions.java:192)
 	at ✽.User presses Tab key on Username field(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:161)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_presses_tab_key_on_...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User presses Tab key on Username field
-     Cursor should move to Password field
-     Next Tab should move to Login button
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify Login form alignment,60fa09f2-2d69-4d50-97e7-00307ccf5e52,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 Username and Password fields should be aligned properly",FAILED,7413.813099999999,"java.lang.AssertionError: Fields are not aligned expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:111)
@@ -293,14 +258,14 @@ Username and Password fields should be aligned properly",FAILED,7413.81309999999
 	at stepdefinitions.LoginStepDefinitions.username_and_password_fields_should_be_aligned_properly(LoginStepDefinitions.java:165)
 	at ✽.Username and Password fields should be aligned properly(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:166)
 ","Likely Cause:
-  - The application's behavior or data has changed, causing assertions to fail.
+  - The login form CSS or layout is incorrect, causing misalignment.
 Fix Steps:
-  1. Validate that the application's expected behavior matches the test.
-  2. Update test data or assertions as needed.
-  3. Collaborate with developers to confirm requirements.
-Benefit:
-  - Keeps tests aligned with business logic.
-  - Reduces false positives and improves trust in test results."
+  1. Review and update CSS for form alignment.
+  2. Use layout tools (e.g., flexbox, grid) for consistent alignment.
+  3. Add UI tests to catch alignment issues early.
+Benefits:
+  - Improves visual quality and user trust.
+  - Ensures accessibility and usability."
 OrangeHRM Login Page,Verify Login button text,874919cd-867d-4a82-aa29-a36c31974107,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 Login button should display text ""Login""",PASSED,7507.800299999999,,
 OrangeHRM Login Page,Verify account locks after 5 failed attempts,66fa82ce-6074-436b-8bb7-b0ed92d0652f,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
@@ -308,18 +273,7 @@ User enters wrong password 5 times
 Account should be locked",SKIPPED,8631.538199999999,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_enters_wrong_password_times(LoginStepDefinitions.java:207)
 	at ✽.User enters wrong password 5 times(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:173)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_enters_wrong_passwo...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User enters wrong password 5 times
-     Account should be locked
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify Login page is served over HTTPS,05543fa9-79d2-4743-98e2-dbf197af75e8,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 Login page URL should start with ""https://""",PASSED,8592.1037,,
 OrangeHRM Login Page,Verify session timeout after inactivity,70c7c8af-6275-4add-a6e0-23e4b1e97b26,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
@@ -328,148 +282,54 @@ User stays idle for 10 minutes
 Session should expire and redirect to login page",SKIPPED,7398.572399999999,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_logs_in_with_valid_credentials(LoginStepDefinitions.java:217)
 	at ✽.User logs in with valid credentials(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:180)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_logs_in_with_valid_...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User logs in with valid credentials
-     User stays idle for 10 minutes
-     Session should expire and redirect to login page
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify user cannot login with expired session cookies,9ad3acee-5e38-4aee-a018-cbeb01d74233,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User deletes session cookies
 User refreshes the page
 User should be redirected to login page",SKIPPED,10068.601299999998,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_refreshes_the_page(LoginStepDefinitions.java:232)
 	at ✽.User refreshes the page(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:186)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_refreshes_the_page(...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User deletes session cookies
-     User refreshes the page
-     User should be redirected to login page
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify multiple users can login simultaneously,1c7a964f-3f4f-46d9-90f9-782902f1f082,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User1 logs in with valid credentials
 User2 logs in with valid credentials in different browser
 Both users should access their dashboards",SKIPPED,7377.7299,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user1_logs_in_with_valid_credentials(LoginStepDefinitions.java:242)
 	at ✽.User1 logs in with valid credentials(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:190)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user1_logs_in_with_valid...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User1 logs in with valid credentials
-     User2 logs in with valid credentials in different browser
-     Both users should access their dashboards
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify password copy-paste restriction,6eef347f-b002-47ec-a7e1-9e0ce5151429,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User tries to paste text into password field
 Pasting should not be allowed",SKIPPED,6825.6179,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_tries_to_paste_text_into_password_field(LoginStepDefinitions.java:257)
 	at ✽.User tries to paste text into password field(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:195)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_tries_to_paste_text...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User tries to paste text into password field
-     Pasting should not be allowed
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify username accepts only allowed characters,0ccd8289-c795-4051-b23f-db8fd23fb7ae,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""Admin123""
 Username should be accepted",PENDING,7385.034199999999,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.username_should_be_accepted(LoginStepDefinitions.java:267)
 	at ✽.Username should be accepted(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:200)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.username_should_be_accep...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User enters username ""Admin123""
-     Username should be accepted
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify login works after successful logout,63fffecc-f653-48d9-b815-3c6a91318865,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User logs out after login
 User logs in again with valid credentials
 User should be navigated to the dashboard page",SKIPPED,7286.4016,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_logs_out_after_login(LoginStepDefinitions.java:272)
 	at ✽.User logs out after login(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:203)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_logs_out_after_logi...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User logs out after login
-     User logs in again with valid credentials
-     User should be navigated to the dashboard page
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify back button after logout,ff8be6a9-2e42-4d56-9714-cd1d37a1d878,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User logs out from OrangeHRM
 User clicks back button
 User should not be able to access dashboard",SKIPPED,6574.4959,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_logs_out_from_orange_hrm(LoginStepDefinitions.java:282)
 	at ✽.User logs out from OrangeHRM(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:208)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_logs_out_from_orang...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User logs out from OrangeHRM
-     User clicks back button
-     User should not be able to access dashboard
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify user stays logged in when browser is refreshed,a3cac15e-0d07-479c-adc2-41d75635d669,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User logs in with valid credentials
 User refreshes the browser
 User should remain on the dashboard page",SKIPPED,9897.851100000002,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_logs_in_with_valid_credentials(LoginStepDefinitions.java:217)
 	at ✽.User logs in with valid credentials(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:213)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_logs_in_with_valid_...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User logs in with valid credentials
-     User refreshes the browser
-     User should remain on the dashboard page
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",
 OrangeHRM Login Page,Verify error message for case-sensitive username,33c026cd-8ede-4d1f-a797-9f5cca7c17b9,"User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
 User enters username ""admin"" in lowercase
 User enters password ""admin123""
@@ -477,17 +337,4 @@ User clicks on Login button
 User should see error message ""Invalid credentials""",SKIPPED,5915.1245,"io.cucumber.java.PendingException: TODO: implement me
 	at stepdefinitions.LoginStepDefinitions.user_enters_username_in_lowercase(LoginStepDefinitions.java:302)
 	at ✽.User enters username ""admin"" in lowercase(file:///C:/Users/komalk5/OneDrive%20-%20Bitwise%20Solutions%20Private%20Limited/Desktop/Automation/Automation15/src/test/resources/features/OrangeHRMLogin.feature:218)
-","Likely Cause:
-  - Test failed with error: io.cucumber.java.PendingException: TODO: implement me
-	at stepdefinitions.LoginStepDefinitions.user_enters_username_in_...
-Fix Steps:
-  1. Review the failed step(s):
-     User is on OrangeHRM login page ""https://opensource-demo.orangehrmlive.com/web/index.php/auth/login""
-     User enters username ""admin"" in lowercase
-     User enters password ""admin123""
-     User clicks on Login button
-     User should see error message ""Invalid credentials""
-  2. Work with the dev team to identify root cause.
-  3. Update the test or application as needed.
-Benefit:
-  - Drives continuous improvement and transparency for all stakeholders."
+",

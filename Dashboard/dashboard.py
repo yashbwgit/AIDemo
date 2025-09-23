@@ -169,10 +169,17 @@ if search:
 
 
 # Summary stats
-col1, col2, col3 = st.columns(3)
+
+# Add Pending and Skipped scenario counts
+pending = (df['step_status'].str.upper() == 'PENDING').sum() if 'step_status' in df.columns else 0
+skipped = (df['step_status'].str.upper() == 'SKIPPED').sum() if 'step_status' in df.columns else 0
+
+col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Total Scenarios", len(df))
 col2.metric("Passed", (df['step_status'] == 'PASSED').sum())
 col3.metric("Failed", (df['step_status'] == 'FAILED').sum())
+col4.metric("Pending", pending)
+col5.metric("Skipped", skipped)
 
 # --- DEFECT DENSITY BY FEATURE ---
 st.markdown("""
@@ -236,24 +243,81 @@ feature_stats['defect_density'] = feature_stats['failed_scenarios'] / feature_st
 feature_stats['defect_density_pct'] = (feature_stats['defect_density'] * 100).round(2)
 feature_stats = feature_stats.sort_values('defect_density', ascending=False)
 
-# Highlight top 3 high defect density features
-st.markdown("<div class='defect-density-card'>", unsafe_allow_html=True)
-st.markdown("<div class='defect-density-title'>Defect Density by Feature</div>", unsafe_allow_html=True)
-
+# --- Modern Defect Density Table Card (Aligned) ---
 st.markdown("""
-<table class='defect-density-table'>
-<colgroup>
-    <col style='width:38%;'>
-    <col style='width:18%;'>
-    <col style='width:18%;'>
-    <col style='width:26%;'>
-</colgroup>
-<tr><th>Feature</th><th>Total Scenarios</th><th>Failed</th><th>Defect Density (%)</th></tr>
+<style>
+.defect-density-card {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(61,220,151,0.10), 0 1px 4px rgba(30,30,30,0.13);
+    padding: 1.2em 1.2em 1.2em 1.2em;
+    margin-bottom: 2em;
+    border: 1.5px solid #444b53;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    color: #e0e6ed;
+    max-width: 820px;
+}
+.defect-density-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.2em;
+    font-size: 1.08em;
+    background: none;
+}
+.defect-density-table th {
+    background: #2a2d32;
+    color: #A5D6FF;
+    font-weight: 600;
+    padding: 0.55em 0.3em 0.55em 0.3em;
+    border-bottom: 2.5px solid #3ddc97;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+.defect-density-table td {
+    padding: 0.45em 0.3em 0.45em 0.3em;
+    border-bottom: 1.5px solid #33373c;
+    text-align: center;
+    font-size: 1.04em;
+}
+.defect-density-table tr.high-density {
+    background: rgba(255,64,64,0.13);
+}
+.defect-density-table tr:last-child td {
+    border-bottom: none;
+}
+.defect-density-title {
+    font-size: 1.18em;
+    font-weight: bold;
+    color: #FFD740;
+    margin-bottom: 0.1em;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+</style>
 """, unsafe_allow_html=True)
+
+# Build the table as a single HTML block for perfect alignment
+table_rows = []
 for i, row in feature_stats.iterrows():
     highlight = " class='high-density'" if i < 3 and row['defect_density'] > 0 else ""
-    st.markdown(f"<tr{highlight}><td>{row['feature_name']}</td><td>{row['total_scenarios']}</td><td>{row['failed_scenarios']}</td><td><b>{row['defect_density_pct']}%</b></td></tr>", unsafe_allow_html=True)
-st.markdown("</table></div>", unsafe_allow_html=True)
+    table_rows.append(f"<tr{highlight}><td>{row['feature_name']}</td><td>{row['total_scenarios']}</td><td>{row['failed_scenarios']}</td><td><b>{row['defect_density_pct']}%</b></td></tr>")
+table_html = f"""
+<div class='defect-density-card'>
+  <div class='defect-density-title'>Defect Density by Feature</div>
+  <table class='defect-density-table'>
+    <colgroup>
+      <col style='width:38%;'>
+      <col style='width:18%;'>
+      <col style='width:18%;'>
+      <col style='width:26%;'>
+    </colgroup>
+    <tr><th>Feature</th><th>Total Scenarios</th><th>Failed</th><th>Defect Density (%)</th></tr>
+    {''.join(table_rows)}
+  </table>
+</div>
+"""
+st.markdown(table_html, unsafe_allow_html=True)
+
 
 # --- CATCHY FAILED SCENARIO CARDS ---
 failed = df[df['step_status'] == 'FAILED']
@@ -355,8 +419,8 @@ if not failed.empty:
         # Split into sections for custom rendering
         cause = fix = benefit = ""
         cause_match = _re.search(r"Likely Cause:\n([\s\S]*?)Fix Steps:", ai)
-        fix_match = _re.search(r"Fix Steps:\n([\s\S]*?)Benefit:", ai)
-        benefit_match = _re.search(r"Benefit:\n([\s\S]*)", ai)
+        fix_match = _re.search(r"Fix Steps:\n([\s\S]*?)Benefits:", ai)
+        benefit_match = _re.search(r"Benefits:\n([\s\S]*)", ai)
         if cause_match:
             cause = cause_match.group(1).strip()
         if fix_match:
@@ -383,9 +447,7 @@ if not failed.empty:
         </div>
         """, unsafe_allow_html=True)
 
-# Charts
-st.subheader("Test Status Overview")
-st.bar_chart(df['step_status'].value_counts())
+
 
 # Table
 st.subheader("Scenario Details")
@@ -402,9 +464,39 @@ if row:
     st.markdown(f"**Duration (ms):** {details['step_duration_ms']}")
     st.markdown("**Steps:**")
     st.code(details['steps'])
-    if details['error_message']:
-        st.markdown("**Error Message:**")
-        st.error(details['error_message'])
-    if details['ai_solution']:
-        st.markdown("**AI Solution:**")
-        st.info(details['ai_solution'])
+    if details['step_status'] != 'PASSED':
+        if details['error_message']:
+            st.markdown("**Error Message:**")
+            st.error(details['error_message'])
+        if details['ai_solution']:
+            import re as _re
+            ai = details['ai_solution']
+            cause = fix = benefit = ""
+            cause_match = _re.search(r"Likely Cause:\n([\s\S]*?)Fix Steps:", ai)
+            fix_match = _re.search(r"Fix Steps:\n([\s\S]*?)Benefits:", ai)
+            benefit_match = _re.search(r"Benefits:\n([\s\S]*)", ai)
+            if cause_match:
+                cause = cause_match.group(1).strip()
+            if fix_match:
+                fix = fix_match.group(1).strip()
+            if benefit_match:
+                benefit = benefit_match.group(1).strip()
+            st.markdown("**AI Solution:**")
+            if cause:
+                st.markdown(
+                    """
+<div style='background:rgba(165,214,255,0.10);border-radius:8px;padding:0.7em 1em 0.7em 1em;margin-bottom:0.5em;'>
+<b style='color:#A5D6FF;'>Likely Cause</b><br>
+<span style='color:#e0e6ed;font-size:1.04em;'>""" + cause.replace('\n', '<br>') + "</span></div>" , unsafe_allow_html=True)
+            if fix:
+                st.markdown(
+                    """
+<div style='background:rgba(61,220,151,0.10);border-radius:8px;padding:0.7em 1em 0.7em 1em;margin-bottom:0.5em;'>
+<b style='color:#3ddc97;'>Fix Steps</b><br>
+<span style='color:#e0e6ed;font-size:1.04em;'>""" + '<br>'.join([f"{step.strip()}" for step in fix.split('\n') if step.strip()]) + "</span></div>" , unsafe_allow_html=True)
+            if benefit:
+                st.markdown(
+                    """
+<div style='background:rgba(255,215,64,0.10);border-radius:8px;padding:0.7em 1em 0.7em 1em;'>
+<b style='color:#FFD740;'>Benefits</b><br>
+<span style='color:#e0e6ed;font-size:1.04em;'>""" + '<br>'.join([f"- {b.strip()}" for b in benefit.split('\n') if b.strip()]) + "</span></div>" , unsafe_allow_html=True)
