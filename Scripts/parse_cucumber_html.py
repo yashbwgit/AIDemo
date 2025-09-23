@@ -197,7 +197,42 @@ for msg in messages:
 
 
 # Senior QA AI insight generator for failed scenarios
+def mask_sensitive(text):
+    if not text:
+        return text
+    # Mask patterns like username: ..., password: ..., user=..., pass=..., etc.
+    patterns = [
+        r'(username\s*[:=]\s*)([^\s\n]+)',
+        r'(password\s*[:=]\s*)([^\s\n]+)',
+        r'(user\s*[:=]\s*)([^\s\n]+)',
+        r'(pass\s*[:=]\s*)([^\s\n]+)',
+        r'(uname\s*[:=]\s*)([^\s\n]+)',
+        r'(pwd\s*[:=]\s*)([^\s\n]+)',
+        r'(login as\s+)([^\s\n]+)',
+        r'(credentials\s*[:=]\s*)([^\s\n]+)',
+        # Also mask steps like: User enters username "..."
+        r'(User enters username ")([^"]+)(")',
+        r'(User enters password ")([^"]+)(")',
+        r'(User enters user ")([^"]+)(")',
+        r'(User enters pass ")([^"]+)(")',
+    ]
+    for pat in patterns:
+        # For patterns with three groups, replace group 2 with XXXXX
+        if 'User enters' in pat:
+            text = re.sub(pat, r'\1XXXXX\3', text, flags=re.IGNORECASE)
+        else:
+            text = re.sub(pat, r'\1XXXXX', text, flags=re.IGNORECASE)
+    return text
+
 def generate_ai_solution(scenario_name, error_message, steps):
+    scenario_name = mask_sensitive(scenario_name)
+    error_message = mask_sensitive(error_message)
+    steps = [mask_sensitive(s) for s in steps] if isinstance(steps, list) else mask_sensitive(steps)
+    steps_preview = steps[:2] if isinstance(steps, list) else str(steps).split('\n')[:2]
+    if not error_message or not str(error_message).strip():
+        return ""
+    scenario = scenario_name.lower() if scenario_name else ""
+    em = error_message.lower() if error_message else ""
     steps_preview = steps[:2] if isinstance(steps, list) else str(steps).split('\n')[:2]
     if not error_message or not str(error_message).strip():
         return ""
@@ -273,19 +308,24 @@ def generate_ai_solution(scenario_name, error_message, steps):
         "Benefits:\n  - Drives continuous improvement and transparency for all stakeholders.\n  - Reduces recurrence of similar issues in the future."
     )
 
+
+# Mask sensitive info in all relevant fields before saving
 steps_rows = []
 for run in scenario_steps.values():
+    scenario_name = mask_sensitive(run['scenario_name'])
+    error_message = mask_sensitive(run['error_message'])
+    steps = [mask_sensitive(s) for s in run['steps']]
     ai_solution = ''
     if run['step_status'] == 'FAILED':
-        ai_solution = generate_ai_solution(run['scenario_name'], run['error_message'], run['steps'])
+        ai_solution = generate_ai_solution(scenario_name, error_message, steps)
     steps_rows.append({
         'feature_name': run['feature_name'],
-        'scenario_name': run['scenario_name'],
+        'scenario_name': scenario_name,
         'scenario_run_id': run['scenario_run_id'],
-        'steps': '\n'.join(run['steps']),
+        'steps': '\n'.join(steps),
         'step_status': run['step_status'],
         'step_duration_ms': run['step_duration_ms'],
-        'error_message': run['error_message'],
+        'error_message': error_message,
         'ai_solution': ai_solution
     })
 
